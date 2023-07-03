@@ -90,8 +90,8 @@ class TestCart:
         assert cart.get_total_price() == 1258
 
     def test_buy_more_products_that_available(self, cart, product):
+        cart.add_product(product, 1001)
         with pytest.raises(ValueError):
-            cart.add_product(product, 1001)
             cart.buy()
 
     def test_buy_products(self, cart, product):
