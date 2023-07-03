@@ -64,9 +64,15 @@ class TestCart:
 
         assert cart.products == {}
 
-    def test_remove_product_from_cart_if_not_remove_count(self, cart, product):
+    def test_remove_product_from_cart_if_not_remove_count(self, cart, product, newspaper):
         cart.add_product(product, 3)
         cart.remove_product(product)
+
+        assert cart.products == {}
+
+    def test_remove_product_that__in_cart(self, cart, newspaper):
+        cart.add_product(newspaper, 5)
+        cart.remove_product(newspaper, 5)
 
         assert cart.products == {}
 
