@@ -27,14 +27,15 @@ class TestProducts:
     Например, текущий класс группирует тесты на класс Product
     """
 
-    def test_product_check_quantity(self, product):
+    def test_product_check_quantity(self, product, newspaper):
         # TODO напишите проверки на метод check_quantity
         assert product.check_quantity(1000)
+        assert newspaper.check_quantity(1501) == False
 
     def test_product_buy(self, product):
         # TODO напишите проверки на метод buy
-        product.buy(500)
-        assert product.check_quantity == 500
+        product.buy(100)
+        assert product.quantity == 900
 
     def test_product_buy_more_than_available(self, product):
         # TODO напишите проверки на метод buy,
@@ -52,9 +53,10 @@ class TestCart:
     """
 
     def test_add_product_to_cart(self, cart, product):
-        cart.add_product(product, 3)
+        cart.add_product(product, 10)
 
-        assert cart.products[product] == 3
+        cart.add_product(newspaper, 3)
+        assert cart.products[newspaper] == 3 and cart.products[product] == 10
 
     def test_remove_product_from_cart_more_than_available(self, cart, product):
         cart.add_product(product, 3)
@@ -88,8 +90,8 @@ class TestCart:
         assert cart.get_total_price() == 1258
 
     def test_buy_more_products_that_available(self, cart, product):
-        cart.add_product(product, 1001)
         with pytest.raises(ValueError):
+            cart.add_product(product, 1001)
             cart.buy()
 
     def test_buy_products(self, cart, product):

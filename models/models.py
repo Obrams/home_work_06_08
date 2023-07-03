@@ -24,6 +24,8 @@ class Product:
         TODO Верните True если количество продукта больше или равно запрашиваемому
             и False в обратном случае
         """
+        if quantity == 0:
+            raise ValueError
         return self.quantity >= quantity
 
     def buy(self, quantity):
@@ -32,6 +34,7 @@ class Product:
             Проверьте количество продукта используя метод check_quantity
             Если продуктов не хватает, то выбросите исключение ValueError
         """
+
         if self.check_quantity(quantity):
             self.quantity = self.quantity - quantity
         else:
@@ -83,6 +86,7 @@ class Cart:
         for product in self.products.keys():
             total_price += self.products[product] * product.price
         return total_price
+
     def buy(self):
         """
         Метод покупки.
