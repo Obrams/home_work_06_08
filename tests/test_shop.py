@@ -54,9 +54,10 @@ class TestCart:
 
     def test_add_product_to_cart(self, cart, product):
         cart.add_product(product, 10)
+        assert cart.products[product] == 10
 
-        cart.add_product(newspaper, 3)
-        assert cart.products[newspaper] == 3 and cart.products[product] == 10
+        cart.add_product(product, 3)
+        assert cart.products[product] == 13
 
     def test_remove_product_from_cart_more_than_available(self, cart, product):
         cart.add_product(product, 3)
